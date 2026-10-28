@@ -5,3 +5,10 @@ src/dlg/dlg.c
 subprojects/*
 !subprojects/*.wrap
 /tests/data/*
+
+# Apple generated builds and binary artifacts
+/out/
+/dist/
+/.build/
+/.swiftpm/
+.DS_Store

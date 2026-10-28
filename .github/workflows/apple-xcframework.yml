@@ -1,0 +1,20 @@
+name: Apple XCFramework
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build arm64 device and arm64 + x86_64 Simulator
+        run: python3 apple/scripts/build_xcframework.py --jobs 3
+      - name: Validate public API linking for every architecture
+        run: python3 apple/scripts/validate_xcframework.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FreeType-iOS-XCFramework
+          path: |
+            dist/FreeType.xcframework
+            dist/build-manifest.json
