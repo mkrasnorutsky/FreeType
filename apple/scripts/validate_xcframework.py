@@ -3,7 +3,9 @@
 from pathlib import Path
 import argparse,plistlib,subprocess,tempfile
 ROOT=Path(__file__).resolve().parents[2]
-p=argparse.ArgumentParser(description=__doc__);p.add_argument('--artifacts',type=Path,default=ROOT/'dist');a=p.parse_args()
+import os
+WORK=Path(os.environ.get("APPLE_BUILD_ROOT", str(ROOT))).expanduser().resolve()
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('--artifacts',type=Path,default=WORK/'dist');a=p.parse_args()
 artifact=a.artifacts/'FreeType.xcframework';info=plistlib.loads((artifact/'Info.plist').read_bytes())
 assert len(info['AvailableLibraries'])==2
 for entry in info['AvailableLibraries']:

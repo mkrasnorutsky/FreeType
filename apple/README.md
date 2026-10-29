@@ -36,3 +36,7 @@ Upload the generated ZIP and checksums to the corresponding GitHub release. Comm
 ## Licensing
 
 Original licensing files are preserved and included in the XCFramework's `Licenses` directory. FreeType is dual-licensed under the FreeType Project License and GPLv2; select the appropriate terms for your distribution. Under the FreeType Project License, retain the license and attribution, including the required acknowledgement in your product documentation. See `docs/FTL.TXT` and `LICENSE.TXT` for the exact terms.
+
+## Xcode header layout (0.1.1)
+
+Binary module maps live under a module-specific header subdirectory, avoiding duplicate `include/module.modulemap` outputs when Xcode processes several static XCFrameworks together. The library bytes and public include paths are unchanged. Set `APPLE_BUILD_ROOT` to keep `out/` and `dist/` outside the checkout.
